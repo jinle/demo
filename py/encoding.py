@@ -7,6 +7,21 @@ import sys
 import codecs
 
 
+def make_files():
+    from codecs import open
+
+    pc = ["linux", "windows", "osx"]
+    linesep = ["\n", "\r\n", "\r"]
+    encoding = ["utf8", "gb2312"]
+    content = [u"I study python.", u"我学Python。", u""]
+
+    for pc, sep in zip(pc, linesep):
+        for x in encoding:
+            name = "{0}-{1}.txt".format(pc, x)
+            with open(name, "w", encoding=x) as f:
+                f.write(sep.join(content))
+
+
 def test_py2(name, encoding):
     with open(name, "rU") as f:
         for line in f:
